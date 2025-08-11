@@ -15,7 +15,7 @@ Weapon* Player::getWeapon() const{
 }
 
 void Player::recoverHP(const Card &card){
-    if(card.getValue() > 1 && card.getValue() < 11 && card.getSuit() == Suit::Hearts){
+    if(card.getValue() > 1 && card.getValue() < 11 && (card.getSuit() == Suit::Hearts || card.getSuit() == Suit::Diamonds)){
         _healthPoints += card.getValue();
     }
     if(_healthPoints > 20){
@@ -27,7 +27,10 @@ void Player::addFloorCompleted(){
     _floorsCompleted++;
 }
 void Player::changeWeapon(const Card &card){
-    _weapon = std::make_unique<Weapon>(card);
+    if(card.getSuit() != Suit::Diamonds)
+        _weapon = nullptr;
+    else
+        _weapon = std::make_unique<Weapon>(card);
 }
 
 void Player::defeatWithWeapon(const Card &card){
