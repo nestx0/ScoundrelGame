@@ -1,3 +1,6 @@
+#include "../includes/cardbehavior.hpp"
+
+#include <memory>
 
 #ifndef CARDS_H
 #define CARDS_H
@@ -10,8 +13,10 @@ class Card{
 private:
     Rank _rank;
     Suit _suit;
+    std::shared_ptr<CardBehavior> _behavior;
+
 public:
-    Card(Rank r, Suit s): _rank(r), _suit(s){}; //Parameter Constructor
+    Card(Rank r, Suit s): _rank(r), _suit(s), _behavior(nullptr){}; //Parameter Constructor
 
     Suit getSuit() const;
     Rank getRank() const;
