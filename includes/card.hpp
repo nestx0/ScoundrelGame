@@ -1,5 +1,5 @@
 #include "../includes/cardbehavior.hpp"
-
+#include <string>
 #include <memory>
 
 #ifndef CARDS_H
@@ -21,9 +21,14 @@ public:
     Suit getSuit() const;
     Rank getRank() const;
     int getValue() const;
+    std::string toString() const;
 
     bool operator<(const Card &other) const;
+    
         
 };
+
+std::string rankToString(Rank _rank);
+std::string suitToString(Suit _suit);
 
 #endif

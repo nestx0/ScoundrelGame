@@ -20,4 +20,6 @@ public:
 
     void defeatWithWeapon(const Card&card);
 
+    Player& operator=(const Player &other);
+
 };
