@@ -39,3 +39,18 @@ void Player::defeatWithWeapon(const Card &card){
         _weapon->setMaxDurability(card);
     }
 }
+
+Player& Player::operator=(const Player &other){
+
+    if(this != &other){
+        _healthPoints = other.getHP();
+        _floorsCompleted = other.getFloors();
+        if(other.getWeapon())
+            _weapon = std::make_unique<Weapon>(*other.getWeapon());
+        else
+            _weapon = nullptr;
+    }
+
+    
+    return *this;
+}
