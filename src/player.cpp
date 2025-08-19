@@ -54,3 +54,6 @@ Player& Player::operator=(const Player &other){
     
     return *this;
 }
+void Player::takeDamage(const Card &card){
+    _healthPoints -= card.getValue();
+}

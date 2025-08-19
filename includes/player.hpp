@@ -19,6 +19,7 @@ public:
     void changeWeapon(const Card &card);
 
     void defeatWithWeapon(const Card&card);
+    void takeDamage(const Card &card);
 
     Player& operator=(const Player &other);
 
