@@ -30,6 +30,10 @@ bool Card::operator<(const Card &other) const{
     return this->getValue() < other.getValue();
 }
 
+std::shared_ptr<CardBehavior> Card::getBehavior() const{
+    return _behavior;
+}
+
 std::string Card::toString() const{
     return rankToString(_rank) + " " + suitToString(_suit);
 }

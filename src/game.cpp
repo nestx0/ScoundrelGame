@@ -95,5 +95,8 @@ void Game::handleDamage(const Card &card){
     }
 }
 void Game::handleSpecialCard(const Card &card){
-    
+    auto behavior = card.getBehavior();
+    if(behavior){
+        behavior->applyEffect(_player, card);
+    }
 }

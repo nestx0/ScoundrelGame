@@ -22,6 +22,7 @@ public:
     Rank getRank() const;
     int getValue() const;
     std::string toString() const;
+    std::shared_ptr<CardBehavior> getBehavior() const;
 
     bool operator<(const Card &other) const;
     

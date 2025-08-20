@@ -29,8 +29,6 @@ public:
     void handleCard(const Card &card);
     void handleSpecialCard(const Card &card);
     void handleDamage(const Card &card);
-    void handleSpecialCard(const Card &card);
-    
 };
 
 #endif
