@@ -93,6 +93,10 @@ void Game::handleDamage(const Card &card){
     else{
         _player.takeDamage(card);
     }
+
+    if(_player.getHP() <= 0){
+        _gameOver = true;
+    }
 }
 void Game::handleSpecialCard(const Card &card){
     auto behavior = card.getBehavior();
