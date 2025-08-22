@@ -3,19 +3,20 @@
 #include <vector>
 
 #ifndef GAME_H
-#define GAME_H 
+#define GAME_H
 
-class Game{
+class Game
+{
 private:
     Player _player;
     Deck _deck;
-    bool _gameOver, _alreadyHealed, _ableToFlee;
+    bool _gameOver, _alreadyHealed, _ableToFlee, _floorCompleted, _gameWon;
     std::vector<Card> _currentCards;
 
 public:
     Game(const Player &player, const Deck &deck);
 
-    //Player getPlayer() const;
+    // Player getPlayer() const;
     Deck getDeck() const;
     bool getState() const;
 
@@ -24,8 +25,9 @@ public:
     void displayRoom() const;
     void displayCurrentCards() const;
     void startRoom();
-    bool floorCompleted() const;
-    Card chooseCard() const;
+    bool askForFlee() const;
+    bool floorCompleted();
+    Card chooseCard();
 
     void handleCard(const Card &card);
     void handleSpecialCard(const Card &card);
