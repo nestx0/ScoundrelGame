@@ -12,7 +12,7 @@ Rank::Seven, Rank::Eight, Rank::Nine, Rank::Ten, Rank::Jack, Rank::Queen, Rank::
 Deck::Deck(){
     for(const auto suit : ALL_SUITS){
         for(const auto rank : ALL_RANKS){
-            _deck.push_front(Card(rank, suit));
+            _deck.push_front(Card(rank, suit)); // Falta colocar los behaviours
         }
     }
 };

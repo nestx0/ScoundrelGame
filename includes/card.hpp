@@ -17,12 +17,16 @@ private:
 
 public:
     Card(Rank r, Suit s): _rank(r), _suit(s), _behavior(nullptr){}; //Parameter Constructor
+    Card(): _rank(Rank::Five), _suit(Suit::Spades), _behavior(nullptr){};
 
     Suit getSuit() const;
     Rank getRank() const;
     int getValue() const;
-    std::string toString() const;
     std::shared_ptr<CardBehavior> getBehavior() const;
+
+    void setBehavior(std::shared_ptr<CardBehavior> behavior);
+    std::string toString() const;
+    
 
     bool operator<(const Card &other) const;
     

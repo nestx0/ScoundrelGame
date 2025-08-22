@@ -38,6 +38,9 @@ std::string Card::toString() const{
     return rankToString(_rank) + " " + suitToString(_suit);
 }
 
+void Card::setBehavior(std::shared_ptr<CardBehavior> behavior){
+    _behavior = std::make_shared<CardBehavior>(behavior);
+}
 
 std::string rankToString(Rank _rank){
     switch (_rank)

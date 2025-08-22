@@ -9,7 +9,7 @@ class Game{
 private:
     Player _player;
     Deck _deck;
-    bool _gameOver, _alreadyHealed;
+    bool _gameOver, _alreadyHealed, _ableToFlee;
     std::vector<Card> _currentCards;
 
 public:
@@ -19,7 +19,8 @@ public:
     Deck getDeck() const;
     bool getState() const;
 
-    void run() const;
+    void run();
+    void flee();
     void displayRoom() const;
     void displayCurrentCards() const;
     void startRoom();

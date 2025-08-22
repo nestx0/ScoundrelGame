@@ -6,6 +6,7 @@ Game::Game(const Player &player, const Deck &deck){
     _deck = deck;
     _gameOver = false;
     _alreadyHealed = false;
+    _ableToFlee = true;
 }
 Deck Game::getDeck() const{
     return _deck;
@@ -102,5 +103,44 @@ void Game::handleSpecialCard(const Card &card){
     auto behavior = card.getBehavior();
     if(behavior){
         behavior->applyEffect(_player, card);
+    }
+}
+
+bool Game::floorCompleted() const{
+    if(_currentCards.size() <= 1){ // Check also if deck is empty to not finish  when 1 card remains
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+void Game::flee(){
+    if(_ableToFlee){
+        for(int i = 0; i < _currentCards.size(); i++){
+            _deck.addCardBack(_currentCards[i]);
+        }
+        _currentCards.clear();
+        _ableToFlee = false;
+    }
+}
+void Game::run(){
+
+    Card option;
+    char o;
+
+    while(!_gameOver){
+        startRoom();
+        while(!floorCompleted()){
+            std::cout << "Want to flee?" << std::endl;
+            option = chooseCard();
+
+            /*
+            Hay todavia que ver como hacer la logica de huir,
+            quizas introducir un bool para controlar floorCompleted
+            en vez de ser solo una funcion
+            */
+        }
+
     }
 }
