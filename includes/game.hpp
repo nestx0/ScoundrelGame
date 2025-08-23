@@ -14,6 +14,7 @@ private:
     std::vector<Card> _currentCards;
 
 public:
+    Game();
     Game(const Player &player, const Deck &deck);
 
     // Player getPlayer() const;

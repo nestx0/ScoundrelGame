@@ -51,6 +51,7 @@ public:
     std::string toString() const;
 
     bool operator<(const Card &other) const;
+    Card &operator=(const Card &other);
 };
 
 std::string rankToString(Rank _rank);

@@ -1,11 +1,21 @@
 #include "../includes/game.hpp"
 #include <iostream>
 
+Game::Game()
+{
+    _gameOver = false;
+    _gameWon = false;
+    _alreadyHealed = false;
+    _ableToFlee = true;
+    _floorCompleted = false;
+}
+
 Game::Game(const Player &player, const Deck &deck)
 {
     _player = player;
     _deck = deck;
     _gameOver = false;
+    _gameWon = false;
     _alreadyHealed = false;
     _ableToFlee = true;
     _floorCompleted = false;
@@ -176,23 +186,20 @@ bool Game::askForFlee() const
         {
             return true;
         }
-        else
-        {
-            return false;
-        }
+        return false;
     }
 }
 void Game::run()
 {
 
     Card option;
-    char o;
 
     while (!_gameOver)
     {
         startRoom();
         while (!floorCompleted())
         {
+            displayRoom();
             if (askForFlee())
                 flee();
             else
@@ -209,4 +216,8 @@ void Game::run()
             }
         }
     }
+    if (_gameWon)
+        std::cout << "Your won" << std::endl;
+    else
+        std::cout << "Shut up nigga" << std::endl;
 }
