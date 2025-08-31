@@ -228,7 +228,7 @@ void Game::run()
         }
     }
     if (_gameWon)
-        std::cout << "Your won" << std::endl;
+        std::cout << "You won" << std::endl;
     else
         std::cout << "Get better" << std::endl;
 }
