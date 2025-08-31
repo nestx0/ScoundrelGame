@@ -40,15 +40,17 @@ void Game::displayRoom() const
     std::cout << "========== FLOOR " << _player.getFloors() << " ==========" << std::endl;
     displayCurrentCards();
     std::cout << std::endl;
-    std::cout << "==============================" << std::endl;
+    std::cout << "=============================" << std::endl;
     std::cout << "Healthpoints: " << _player.getHP() << std::endl;
     std::cout << "Weapon: ";
     if (_player.getWeapon() && _player.getWeapon()->hasValue())
     {
-        try{
+        try
+        {
             std::cout << _player.getWeapon()->getCard().toString();
         }
-        catch(const std::exception &e){
+        catch (const std::exception &e)
+        {
             std::cout << "Invalid Weapon Selected" << std::endl;
         }
     }
@@ -114,7 +116,7 @@ void Game::handleDamage(const Card &card)
 
     char option;
 
-    if (_player.getWeapon() && _player.getWeapon()->hasValue())
+    if (_player.getWeapon() && _player.getWeapon()->hasValue() && _player.getWeapon()->getMaxDurability() > card.getValue())
     {
         std::cout << "Do you want to defend? (Y/N)" << std::endl;
         std::cin >> option;
@@ -124,12 +126,12 @@ void Game::handleDamage(const Card &card)
         }
         else
         {
-            _player.takeDamage(card);
+            _player.takeDamage(card.getValue());
         }
     }
     else
     {
-        _player.takeDamage(card);
+        _player.takeDamage(card.getValue());
     }
 
     if (_player.getHP() <= 0)
@@ -194,32 +196,35 @@ bool Game::askForFlee() const
         }
         return false;
     }
+    else
+        return false;
 }
 void Game::run()
 {
 
     Card option;
 
-    while (!_gameOver && _player.getHP() <= 0)
+    while (!_gameOver && _player.getHP() >= 0)
     {
         startRoom();
+        displayRoom();
+        if (askForFlee())
+            flee();
+        else
+            _ableToFlee = true;
         while (!floorCompleted())
         {
-            displayRoom();
-            if (askForFlee())
-                flee();
+            option = chooseCard();
+            if (option.getBehavior())
+            {
+                handleSpecialCard(option);
+            }
             else
             {
-                option = chooseCard();
-                if (option.getBehavior())
-                {
-                    handleSpecialCard(option);
-                }
-                else
-                {
-                    handleCard(option);
-                }
+                handleCard(option);
             }
+            if (_currentCards.size() > 1)
+                displayRoom();
         }
     }
     if (_gameWon)

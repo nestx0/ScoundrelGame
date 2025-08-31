@@ -12,7 +12,7 @@ int Player::getFloors() const
 {
     return _floorsCompleted;
 }
-Weapon* Player::getWeapon() const
+Weapon *Player::getWeapon() const
 {
     return _weapon.get();
 }
@@ -45,6 +45,8 @@ void Player::defeatWithWeapon(const Card &card)
 {
     if (_weapon->hasValue())
     {
+        if (card.getValue() - _weapon->getCard().getValue() > 0)
+            takeDamage(card.getValue() - _weapon->getCard().getValue());
         _weapon->addEnemyDefeated(card);
         _weapon->setMaxDurability(card);
     }
@@ -65,7 +67,7 @@ Player &Player::operator=(const Player &other)
 
     return *this;
 }
-void Player::takeDamage(const Card &card)
+void Player::takeDamage(int damage)
 {
-    _healthPoints -= card.getValue();
+    _healthPoints -= damage;
 }
