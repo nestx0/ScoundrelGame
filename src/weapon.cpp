@@ -133,13 +133,21 @@ void Weapon::addEnemyDefeated(const Card &enemy)
 }
 void Weapon::showEnemiesDefeated() const
 {
-    std::vector<Card> temp;
-    for (int i = 0; i < _enemiesDefeated.size(); i++)
+    if (!_enemiesDefeated.empty())
     {
-        temp.push_back(_enemiesDefeated.top());
-    }
-    for (int i = temp.size() - 1; i >= 0; i--)
-    {
-        std::cout << temp[i].toString();
+        std::stack<Card> tempStack = _enemiesDefeated;
+        std::vector<Card> temp;
+
+        while (!tempStack.empty())
+        {
+            temp.push_back(tempStack.top());
+            tempStack.pop();
+        }
+
+        for (int i = temp.size() - 1; i >= 0; i--)
+        {
+            std::cout << temp[i].toString() << " ";
+        }
+        std::cout << std::endl;
     }
 }

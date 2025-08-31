@@ -47,7 +47,7 @@ void Game::displayRoom() const
     {
         try
         {
-            std::cout << _player.getWeapon()->getCard().toString();
+            std::cout << _player.getWeapon()->getCard().toString() << std::endl;
         }
         catch (const std::exception &e)
         {
@@ -56,9 +56,18 @@ void Game::displayRoom() const
     }
     else
     {
-        std::cout << "None";
+        std::cout << "None" << std::endl;
     }
-    std::cout << std::endl;
+    if (_player.getWeapon() && _player.getWeapon()->hasValue())
+    {
+        std::cout << "Enemies defeated: ";
+        if (_player.getWeapon()->getEnemiesDefeated().empty())
+            std::cout << "None" << std::endl;
+        else
+        {
+            _player.getWeapon()->showEnemiesDefeated();
+        }
+    }
 }
 void Game::startRoom()
 {
