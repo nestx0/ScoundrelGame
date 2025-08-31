@@ -2,6 +2,7 @@
 #include "../includes/weapon.hpp"
 #include "../includes/player.hpp"
 #include <assert.h>
+#include <iostream>
 
 int Player::getHP() const
 {
@@ -11,9 +12,8 @@ int Player::getFloors() const
 {
     return _floorsCompleted;
 }
-Weapon *Player::getWeapon() const
+Weapon* Player::getWeapon() const
 {
-    assert(_weapon->hasValue());
     return _weapon.get();
 }
 

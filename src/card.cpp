@@ -1,4 +1,5 @@
 #include "../includes/card.hpp"
+#include <iostream>
 
 Suit Card::getSuit() const
 {

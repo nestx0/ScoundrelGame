@@ -18,8 +18,9 @@ Deck::Deck()
             _deck.push_front(Card(rank, suit)); // Falta colocar los behaviours
         }
     }
+    shuffle();
 };
-void Deck::suffle()
+void Deck::shuffle()
 {
     std::random_device rd;
     std::mt19937 g(rd());

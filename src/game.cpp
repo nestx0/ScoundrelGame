@@ -37,24 +37,30 @@ void Game::displayCurrentCards() const
 }
 void Game::displayRoom() const
 {
-    std::cout << "========== FLOOR " << _player.getFloors() + 1 << " ==========" << std::endl;
+    std::cout << "========== FLOOR " << _player.getFloors() << " ==========" << std::endl;
     displayCurrentCards();
     std::cout << std::endl;
     std::cout << "==============================" << std::endl;
     std::cout << "Healthpoints: " << _player.getHP() << std::endl;
     std::cout << "Weapon: ";
-    if (_player.getWeapon())
+    if (_player.getWeapon() && _player.getWeapon()->hasValue())
     {
-        std::cout << _player.getWeapon()->getCard().toString();
+        try{
+            std::cout << _player.getWeapon()->getCard().toString();
+        }
+        catch(const std::exception &e){
+            std::cout << "Invalid Weapon Selected" << std::endl;
+        }
     }
     else
     {
-        std::cout << "null";
+        std::cout << "None";
     }
     std::cout << std::endl;
 }
 void Game::startRoom()
 {
+    _player.addFloorCompleted();
     _alreadyHealed = false;
     for (int i = _currentCards.size(); i < 4; i++)
     {
@@ -108,7 +114,7 @@ void Game::handleDamage(const Card &card)
 
     char option;
 
-    if (_player.getWeapon() != nullptr)
+    if (_player.getWeapon() && _player.getWeapon()->hasValue())
     {
         std::cout << "Do you want to defend? (Y/N)" << std::endl;
         std::cin >> option;
@@ -194,7 +200,7 @@ void Game::run()
 
     Card option;
 
-    while (!_gameOver)
+    while (!_gameOver && _player.getHP() <= 0)
     {
         startRoom();
         while (!floorCompleted())
@@ -219,5 +225,5 @@ void Game::run()
     if (_gameWon)
         std::cout << "Your won" << std::endl;
     else
-        std::cout << "Shut up nigga" << std::endl;
+        std::cout << "Get better" << std::endl;
 }

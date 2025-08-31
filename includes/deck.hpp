@@ -12,7 +12,7 @@ private:
 public:
     Deck(); // Default Constructor
 
-    void suffle();
+    void shuffle();
     Card draw();
     void addCardBack(const Card &card);
     bool isEmpty() const;

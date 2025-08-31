@@ -1,6 +1,6 @@
 #include "../includes/weapon.hpp"
 #include "../includes/card.hpp"
-#include <assert.h>
+#include <iostream>
 
 Weapon::Weapon(){
     _weapon = nullptr;
@@ -22,7 +22,9 @@ Weapon::Weapon(const Card &card){
 };
 
 Card Weapon::getCard() const{
-    assert(hasValue());
+    if (!_weapon) {
+        throw std::runtime_error("Weapon has no card");
+    }
     return *_weapon;
 }
 int Weapon::getMaxDurability() const{
@@ -32,8 +34,8 @@ int Weapon::getReducedDamage() const{
     return _reducedDamage;
 }
 void Weapon::setMaxDurability(const Card &other){
-    assert(hasValue());
-    _maxDurability = other.getValue();
+    if(hasValue())
+        _maxDurability = other.getValue();
 }
 bool Weapon::isAbleToDefend(const Card &card) const{
     return this->_maxDurability > card.getValue();
