@@ -15,7 +15,15 @@ Deck::Deck()
     {
         for (const auto rank : ALL_RANKS)
         {
-            _deck.push_front(Card(rank, suit)); // Falta colocar los behaviours
+            std::shared_ptr<CardBehavior> behavior = nullptr;
+            if (rank == Rank::Jack || rank == Rank::Queen || rank == Rank::King || rank == Rank::Ace)
+            {
+                if (suit == Suit::Hearts)
+                    behavior = std::make_shared<MerchantBehavior>();
+                else if (suit == Suit::Diamonds)
+                    behavior = std::make_shared<BlacksmithBehavior>();
+            }
+            _deck.push_front(Card(rank, suit, behavior));
         }
     }
     shuffle();

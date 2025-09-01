@@ -38,7 +38,7 @@ private:
     std::shared_ptr<CardBehavior> _behavior;
 
 public:
-    Card(Rank r, Suit s) : _rank(r), _suit(s), _behavior(nullptr) {}; // Parameter Constructor
+    Card(Rank r, Suit s, std::shared_ptr<CardBehavior> _behavior = nullptr) : _rank(r), _suit(s), _behavior(_behavior) {}; // Parameter Constructor
     Card() : _rank(Rank::Five), _suit(Suit::Spades), _behavior(nullptr) {};
     Card(const Card &other) : _rank(other.getRank()), _suit(other.getSuit()), _behavior(other.getBehavior()) {};
 
