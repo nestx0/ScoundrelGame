@@ -112,13 +112,13 @@ std::string suitToString(Suit _suit)
     switch (_suit)
     {
     case Suit::Hearts:
-        return "\u2665"; // ♥
+        return "H"; // \u2665 on Linux ♥
     case Suit::Spades:
-        return "\u2660"; // ♠
+        return "S"; // \u2660 on Linux ♠
     case Suit::Clubs:
-        return "\u2663"; // ♣
+        return "C"; // \u2663 on Linux ♣
     case Suit::Diamonds:
-        return "\u2666"; // ♦
+        return "D"; // \u2666 on Linux ♦
     default:
         return "?";
     }

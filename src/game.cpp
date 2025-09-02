@@ -213,7 +213,7 @@ void Game::run()
 
     Card option;
 
-    while (!_gameOver && _player.getHP() >= 0)
+    while (!_gameOver && _player.getHP() > 0)
     {
         startRoom();
         displayRoom();
