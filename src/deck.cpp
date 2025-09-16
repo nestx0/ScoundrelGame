@@ -48,3 +48,11 @@ bool Deck::isEmpty() const
 {
     return _deck.empty();
 }
+int Deck::size() const
+{
+    return _deck.size();
+}
+Card Deck::at(int index) const
+{
+    return _deck.at(index);
+}

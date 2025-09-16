@@ -49,6 +49,11 @@ bool Card::operator<(const Card &other) const
     return this->getValue() < other.getValue();
 }
 
+std::string Card::cardToRoute() const
+{
+    return "assets/cards/" + this->toString();
+}
+
 std::shared_ptr<CardBehavior> Card::getBehavior() const
 {
     return _behavior;
@@ -56,7 +61,7 @@ std::shared_ptr<CardBehavior> Card::getBehavior() const
 
 std::string Card::toString() const
 {
-    return rankToString(_rank) + " " + suitToString(_suit);
+    return suitToString(_suit) + rankToString(_rank);
 }
 
 void Card::setBehavior(std::shared_ptr<CardBehavior> behavior)

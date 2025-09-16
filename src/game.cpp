@@ -73,9 +73,18 @@ void Game::startRoom()
 {
     _player.addFloorCompleted();
     _alreadyHealed = false;
-    for (int i = _currentCards.size(); i < 4; i++)
+    if (!_deck.isEmpty())
     {
-        _currentCards.push_back(_deck.draw());
+        for (int i = _currentCards.size(); i < 4; i++)
+        {
+            if (!_deck.isEmpty())
+                _currentCards.push_back(_deck.draw());
+        }
+    }
+    else
+    {
+        _gameOver = true;
+        _gameWon = true;
     }
 }
 Card Game::chooseCard()

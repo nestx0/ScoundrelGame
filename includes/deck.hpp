@@ -13,6 +13,8 @@ public:
     Deck(); // Default Constructor
 
     void shuffle();
+    Card at(int index) const;
+    int size() const;
     Card draw();
     void addCardBack(const Card &card);
     bool isEmpty() const;

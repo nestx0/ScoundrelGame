@@ -49,6 +49,7 @@ public:
 
     void setBehavior(std::shared_ptr<CardBehavior> behavior);
     std::string toString() const;
+    std::string cardToRoute() const;
 
     bool operator<(const Card &other) const;
     Card &operator=(const Card &other);
