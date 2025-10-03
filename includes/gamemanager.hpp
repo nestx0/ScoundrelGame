@@ -1,27 +1,38 @@
+#include "enginecontext.hpp"
 #include "game.hpp"
-#include "texturemanager.hpp"
 #include "screenmanager.hpp"
+#include "texturemanager.hpp"
 
 #ifndef GAMEMANAGER_H
 #define GAMEMANAGER_H
 
-class GameManager
-{
+class GameManager {
 private:
-    Game &_game;
-    ScreenManager _screenManager;
-    TextureManager _textureManager;
+  Game _game;
+  ScreenManager _screenManager;
+  TextureManager _textureManager;
+  EngineContext _engineContext;
 
 public:
-    GameManager(Game &game) : _game(game) {};
+  GameManager() : _screenManager(&_engineContext) {
+    _engineContext._screenManager = &_screenManager;
+    _engineContext._game = &_game;
+    _engineContext._textureManager = &_textureManager;
+  };
 
-    const Game &getGame() const;
-    const ScreenManager &getScreenManager() const;
-    const TextureManager &getTextureManager() const;
+  ~GameManager() { unload(); };
 
-    Game &getGame();
-    ScreenManager &getScreenManager();
-    TextureManager &getTextureManager();
+  const Game &getGame() const;
+  const ScreenManager &getScreenManager() const;
+  const TextureManager &getTextureManager() const;
+  const EngineContext &getContext() const;
+
+  Game &getGame();
+  ScreenManager &getScreenManager();
+  TextureManager &getTextureManager();
+  EngineContext &getContext();
+
+  void unload();
 };
 
-#endif
+#endif /* GAMEMANAGER_H */

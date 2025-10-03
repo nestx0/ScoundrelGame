@@ -1,29 +1,50 @@
+#include "../includes/button.hpp"
 #include "../includes/game.hpp"
-#include "raylib.h"
+#include "../includes/gamemanager.hpp"
+#include "../includes/raylib.h"
+#include "../includes/screenmanager.hpp"
+#include "../includes/texturemanager.hpp"
+int main() {
 
-int main()
-{
+  const int screenWidth = 800;
+  const int screenHeight = 450;
 
-    const int screenWidth = 800;
-    const int screenHeight = 450;
+  InitWindow(screenWidth, screenHeight, "Vamos los gallos");
+  /*
+  Deck si;
+  Game game;
+  TextureManager java;
+  ScreenManager hola(game);
+  SetTargetFPS(60);
 
-    InitWindow(screenWidth, screenHeight, "Vamos los gallos");
+  Button jinou(0, 0, 100, 100, "jinou", RED, GREEN, BLUE,
+               java.getTexture(si.at(10).toString()));
 
-    SetTargetFPS(60);
-    while (!WindowShouldClose()) // Detect window close button or ESC key
-    {
-        BeginDrawing();
+  */
 
-        ClearBackground(RAYWHITE);
+  GameManager Engine;
 
-        DrawText("Los gallos muy gallos", 190, 200, 20, LIGHTGRAY);
+  while (!WindowShouldClose() &&
+         !Engine.getContext()
+              .closeRequest) // Detect window close button or ESC key
+  {
+    BeginDrawing();
 
-        EndDrawing();
-    }
-    CloseWindow();
+    ClearBackground(RAYWHITE);
+    // hola.pushScreen(std::make_unique<MainMenuScreen>());
+    // jinou.drawButton();
 
-    Game game;
-    game.run();
+    Engine.getScreenManager().pushScreen(std::make_unique<MainMenuScreen>());
+    Engine.getScreenManager().run();
 
-    return 0;
+    DrawText("Los gallos muy gallos", 190, 200, 20, LIGHTGRAY);
+
+    EndDrawing();
+  }
+  Engine.unload();
+  CloseWindow();
+
+  // game.run();
+
+  return 0;
 }
